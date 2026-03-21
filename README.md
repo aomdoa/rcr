@@ -1,2 +1,2 @@
-# rdcs
-REST Device Control Service
+# rcr
+RESTful Command Router
