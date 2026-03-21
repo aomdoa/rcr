@@ -1,0 +1,35 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+typedef struct
+{
+  char *id;
+  char *name;
+  char *protocol;
+  char *display_status;
+  char *display_on;
+  char *display_off;
+} ScreenType;
+
+typedef struct
+{
+  char *id;
+  char *name;
+  char *type;
+  char *address;
+  int port;
+} ScreenConfig;
+
+typedef struct
+{
+  ScreenType *screen_types;
+  int screen_type_count;
+  ScreenConfig *screen_configs;
+  int screen_config_count;
+} Configuration;
+
+Configuration *getConfigurations();
+ScreenConfig *getScreenConfig(char *);
+ScreenType *getScreenType(char *);
+
+#endif /* CONFIG_H */

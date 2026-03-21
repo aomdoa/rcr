@@ -55,10 +55,10 @@ dkms.conf
 *.dwo
 
 # build files
-autom4te.cache/
-config.log
-config.status
-Makefile
-src/Makefile
-.deps
-src/rcr
+**/autom4te.cache
+**/config.log
+**/config.status
+**/Makefile
+**/.deps
+**/rcr
+

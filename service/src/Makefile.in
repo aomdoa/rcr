@@ -100,7 +100,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_rcr_OBJECTS = rcr-main.$(OBJEXT)
+am_rcr_OBJECTS = rcr-main.$(OBJEXT) rcr-service.$(OBJEXT) \
+	rcr-config.$(OBJEXT) rcr-helper.$(OBJEXT) \
+	rcr-screen_control.$(OBJEXT)
 rcr_OBJECTS = $(am_rcr_OBJECTS)
 am__DEPENDENCIES_1 =
 rcr_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
@@ -121,7 +123,9 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/rcr-main.Po
+am__depfiles_remade = ./$(DEPDIR)/rcr-config.Po \
+	./$(DEPDIR)/rcr-helper.Po ./$(DEPDIR)/rcr-main.Po \
+	./$(DEPDIR)/rcr-screen_control.Po ./$(DEPDIR)/rcr-service.Po
 am__mv = mv -f
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -264,7 +268,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 rcr_CFLAGS = $(MICROHTTPD_CFLAGS) $(LIBCJSON_CFLAGS)
 rcr_LDADD = $(MICROHTTPD_LIBS) $(LIBCJSON_LIBS)
-rcr_SOURCES = main.c
+rcr_SOURCES = main.c service.c config.c helper.c screen_control.c
 AM_CPPFLAGS = -DDATADIR='"$(datadir)/rcr"'
 all: all-am
 
@@ -352,7 +356,11 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rcr-config.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rcr-helper.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rcr-main.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rcr-screen_control.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rcr-service.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -387,6 +395,62 @@ rcr-main.obj: main.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='main.c' object='rcr-main.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -c -o rcr-main.obj `if test -f 'main.c'; then $(CYGPATH_W) 'main.c'; else $(CYGPATH_W) '$(srcdir)/main.c'; fi`
+
+rcr-service.o: service.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -MT rcr-service.o -MD -MP -MF $(DEPDIR)/rcr-service.Tpo -c -o rcr-service.o `test -f 'service.c' || echo '$(srcdir)/'`service.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/rcr-service.Tpo $(DEPDIR)/rcr-service.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='service.c' object='rcr-service.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -c -o rcr-service.o `test -f 'service.c' || echo '$(srcdir)/'`service.c
+
+rcr-service.obj: service.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -MT rcr-service.obj -MD -MP -MF $(DEPDIR)/rcr-service.Tpo -c -o rcr-service.obj `if test -f 'service.c'; then $(CYGPATH_W) 'service.c'; else $(CYGPATH_W) '$(srcdir)/service.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/rcr-service.Tpo $(DEPDIR)/rcr-service.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='service.c' object='rcr-service.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -c -o rcr-service.obj `if test -f 'service.c'; then $(CYGPATH_W) 'service.c'; else $(CYGPATH_W) '$(srcdir)/service.c'; fi`
+
+rcr-config.o: config.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -MT rcr-config.o -MD -MP -MF $(DEPDIR)/rcr-config.Tpo -c -o rcr-config.o `test -f 'config.c' || echo '$(srcdir)/'`config.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/rcr-config.Tpo $(DEPDIR)/rcr-config.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='config.c' object='rcr-config.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -c -o rcr-config.o `test -f 'config.c' || echo '$(srcdir)/'`config.c
+
+rcr-config.obj: config.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -MT rcr-config.obj -MD -MP -MF $(DEPDIR)/rcr-config.Tpo -c -o rcr-config.obj `if test -f 'config.c'; then $(CYGPATH_W) 'config.c'; else $(CYGPATH_W) '$(srcdir)/config.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/rcr-config.Tpo $(DEPDIR)/rcr-config.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='config.c' object='rcr-config.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -c -o rcr-config.obj `if test -f 'config.c'; then $(CYGPATH_W) 'config.c'; else $(CYGPATH_W) '$(srcdir)/config.c'; fi`
+
+rcr-helper.o: helper.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -MT rcr-helper.o -MD -MP -MF $(DEPDIR)/rcr-helper.Tpo -c -o rcr-helper.o `test -f 'helper.c' || echo '$(srcdir)/'`helper.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/rcr-helper.Tpo $(DEPDIR)/rcr-helper.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='helper.c' object='rcr-helper.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -c -o rcr-helper.o `test -f 'helper.c' || echo '$(srcdir)/'`helper.c
+
+rcr-helper.obj: helper.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -MT rcr-helper.obj -MD -MP -MF $(DEPDIR)/rcr-helper.Tpo -c -o rcr-helper.obj `if test -f 'helper.c'; then $(CYGPATH_W) 'helper.c'; else $(CYGPATH_W) '$(srcdir)/helper.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/rcr-helper.Tpo $(DEPDIR)/rcr-helper.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='helper.c' object='rcr-helper.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -c -o rcr-helper.obj `if test -f 'helper.c'; then $(CYGPATH_W) 'helper.c'; else $(CYGPATH_W) '$(srcdir)/helper.c'; fi`
+
+rcr-screen_control.o: screen_control.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -MT rcr-screen_control.o -MD -MP -MF $(DEPDIR)/rcr-screen_control.Tpo -c -o rcr-screen_control.o `test -f 'screen_control.c' || echo '$(srcdir)/'`screen_control.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/rcr-screen_control.Tpo $(DEPDIR)/rcr-screen_control.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='screen_control.c' object='rcr-screen_control.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -c -o rcr-screen_control.o `test -f 'screen_control.c' || echo '$(srcdir)/'`screen_control.c
+
+rcr-screen_control.obj: screen_control.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -MT rcr-screen_control.obj -MD -MP -MF $(DEPDIR)/rcr-screen_control.Tpo -c -o rcr-screen_control.obj `if test -f 'screen_control.c'; then $(CYGPATH_W) 'screen_control.c'; else $(CYGPATH_W) '$(srcdir)/screen_control.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/rcr-screen_control.Tpo $(DEPDIR)/rcr-screen_control.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='screen_control.c' object='rcr-screen_control.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(rcr_CFLAGS) $(CFLAGS) -c -o rcr-screen_control.obj `if test -f 'screen_control.c'; then $(CYGPATH_W) 'screen_control.c'; else $(CYGPATH_W) '$(srcdir)/screen_control.c'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -515,7 +579,11 @@ clean: clean-am
 clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
+	-rm -f ./$(DEPDIR)/rcr-config.Po
+	-rm -f ./$(DEPDIR)/rcr-helper.Po
 	-rm -f ./$(DEPDIR)/rcr-main.Po
+	-rm -f ./$(DEPDIR)/rcr-screen_control.Po
+	-rm -f ./$(DEPDIR)/rcr-service.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -561,7 +629,11 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
+	-rm -f ./$(DEPDIR)/rcr-config.Po
+	-rm -f ./$(DEPDIR)/rcr-helper.Po
 	-rm -f ./$(DEPDIR)/rcr-main.Po
+	-rm -f ./$(DEPDIR)/rcr-screen_control.Po
+	-rm -f ./$(DEPDIR)/rcr-service.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
