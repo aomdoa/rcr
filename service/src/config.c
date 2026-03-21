@@ -1,3 +1,6 @@
+/**
+ * @copyright 2026 David Shurgold <aomdoa@gmail.com>
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

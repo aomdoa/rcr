@@ -1,3 +1,6 @@
+/**
+ * @copyright 2026 David Shurgold <aomdoa@gmail.com>
+ */
 #ifndef CONFIG_H
 #define CONFIG_H
 

@@ -1,3 +1,7 @@
+/**
+ * @copyright 2026 David Shurgold <aomdoa@gmail.com>
+ * Thank you claude.ai
+ */
 #ifndef SERVICE_H
 #define SERVICE_H
 

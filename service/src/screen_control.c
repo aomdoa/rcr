@@ -1,3 +1,6 @@
+/**
+ * @copyright 2026 David Shurgold <aomdoa@gmail.com>
+ */
 #include <cjson/cJSON.h>
 #include "screen_control.h"
 #include "config.h"

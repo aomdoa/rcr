@@ -1,3 +1,6 @@
+/**
+ * @copyright 2026 David Shurgold <aomdoa@gmail.com>
+ */
 #ifndef SCREEN_CONTROL_H
 #define SCREEN_CONTROL_H
 
