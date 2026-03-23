@@ -1,0 +1,58 @@
+{
+  "screen_types": [
+    {
+      "id": "slegacy",
+      "name": "Samsung Legacy Screen",
+      "protocol": "hex",
+      "display_status": "AA FF 00 01 01 02",
+      "display_on":     "AA FF 00 01 01 01",
+      "display_off":    "AA FF 00 01 01 00"
+    },
+    {
+      "id": "samsung",
+      "name": "Samsung Screen",
+      "protocol": "hex",
+      "display_status": "AA FF 01 00 01 01 02",
+      "display_on":     "AA FF 01 00 01 01 01",
+      "display_off":    "AA FF 01 00 01 01 00" 
+    },
+   {
+      "id": "lg",
+      "name": "LG Screen",
+      "protocol": "ascii",
+      "display_status": "ka 00 03",
+      "display_on":     "ka 00 01",
+      "display_off":    "ka 00 00"
+    } 
+  ],
+  "screens": [
+    {
+      "id": "mainLeft1",
+      "name": "Main Office - Left",
+      "type": "lg",
+      "address": "192.168.12.13",
+      "port": 8001
+    },
+    {
+      "id": "mainRight1",
+      "name": "Main Office - Right",
+      "type": "lg",
+      "address": "192.168.12.13",
+      "port": 8002
+    },
+    {
+      "id": "hallway",
+      "name": "Hallway",
+      "type": "samsung",
+      "address": "192.168.12.13",
+      "port": 8505
+    },
+    {
+      "id": "frontdesk",
+      "name": "Front Desk",
+      "type": "samsung",
+      "address": "192.168.88.23",
+      "port": 80
+    }
+  ]
+}
