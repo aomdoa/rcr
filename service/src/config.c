@@ -8,7 +8,7 @@
 #include "config.h"
 #include "helper.h"
 
-int getNumberValue(const cJSON *element, const char *name)
+int get_number_value(const cJSON *element, const char *name)
 {
   const cJSON *value = cJSON_GetObjectItemCaseSensitive(element, name);
   if (!cJSON_IsNumber(value))
@@ -19,7 +19,7 @@ int getNumberValue(const cJSON *element, const char *name)
   return value->valueint;
 }
 
-char *getStringValue(const cJSON *element, const char *name)
+char *get_string_value(const cJSON *element, const char *name)
 {
   const cJSON *value = cJSON_GetObjectItemCaseSensitive(element, name);
   if (!cJSON_IsString(value))
@@ -31,7 +31,7 @@ char *getStringValue(const cJSON *element, const char *name)
 }
 
 static Configuration *_config = NULL;
-Configuration *getConfigurations()
+Configuration *get_configurations()
 {
   if (_config) {
     return _config;
@@ -59,12 +59,12 @@ Configuration *getConfigurations()
   const cJSON *st = NULL;
   cJSON_ArrayForEach(st, screen_types)
   {
-    config->screen_types[i].id = strdup(getStringValue(st, "id"));
-    config->screen_types[i].name = strdup(getStringValue(st, "name"));
-    config->screen_types[i].protocol = strdup(getStringValue(st, "protocol"));
-    config->screen_types[i].display_status = strdup(getStringValue(st, "display_status"));
-    config->screen_types[i].display_on = strdup(getStringValue(st, "display_on"));
-    config->screen_types[i].display_off = strdup(getStringValue(st, "display_off"));
+    config->screen_types[i].id = strdup(get_string_value(st, "id"));
+    config->screen_types[i].name = strdup(get_string_value(st, "name"));
+    config->screen_types[i].protocol = strdup(get_string_value(st, "protocol"));
+    config->screen_types[i].display_status = strdup(get_string_value(st, "display_status"));
+    config->screen_types[i].display_on = strdup(get_string_value(st, "display_on"));
+    config->screen_types[i].display_off = strdup(get_string_value(st, "display_off"));
     i++;
   }
 
@@ -77,11 +77,11 @@ Configuration *getConfigurations()
   const cJSON *sc = NULL;
   cJSON_ArrayForEach(sc, screen_configs)
   {
-    config->screen_configs[i].id = strdup(getStringValue(sc, "id"));
-    config->screen_configs[i].name = strdup(getStringValue(sc, "name"));
-    config->screen_configs[i].type = strdup(getStringValue(sc, "type"));
-    config->screen_configs[i].address = strdup(getStringValue(sc, "address"));
-    config->screen_configs[i].port = getNumberValue(sc, "port");
+    config->screen_configs[i].id = strdup(get_string_value(sc, "id"));
+    config->screen_configs[i].name = strdup(get_string_value(sc, "name"));
+    config->screen_configs[i].type = strdup(get_string_value(sc, "type"));
+    config->screen_configs[i].address = strdup(get_string_value(sc, "address"));
+    config->screen_configs[i].port = get_number_value(sc, "port");
     i++;
   }
 
@@ -90,8 +90,8 @@ Configuration *getConfigurations()
   return config;
 }
 
-ScreenConfig *getScreenConfig(char *id) {
-  Configuration *config = getConfigurations();
+ScreenConfig *get_screen_config(const char *id) {
+  Configuration *config = get_configurations();
   for (int i = 0; i < config->screen_config_count; i++) {
     if (strcmp(id, config->screen_configs[i].id) == 0) {
       return &config->screen_configs[i];
@@ -100,8 +100,8 @@ ScreenConfig *getScreenConfig(char *id) {
   return NULL;
 }
 
-ScreenType *getScreenType(char *id) {
-  Configuration *config = getConfigurations();
+ScreenType *get_screen_type(const char *id) {
+  Configuration *config = get_configurations();
   for (int i = 0; i< config->screen_type_count; i++) {
     if (strcmp(id, config->screen_types[i].id) == 0) {
       return &config->screen_types[i];

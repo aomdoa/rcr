@@ -20,9 +20,9 @@
       "id": "lg",
       "name": "LG Screen",
       "protocol": "ascii",
-      "display_status": "ka 00 03\n",
-      "display_on":     "ka 00 01\n",
-      "display_off":    "ka 00 00\n"
+      "display_status": "ka 00 03",
+      "display_on":     "ka 00 01",
+      "display_off":    "ka 00 00"
     } 
   ],
   "screens": [

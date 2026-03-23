@@ -100,33 +100,52 @@ enum MHD_Result handle_get_screen_status(struct MHD_Connection *connection, cons
 {
   /* TODO: look up `name` in your screen registry */
   char output[256];
-  snprintf(output, sizeof(output), "{\"name\": \"%s\", \"status\": \"active\"}", name);
+  ScreenResult result = get_screen_status(name);
+  char *status = (result.error) ? result.error : result.response;
+  snprintf(output, sizeof(output), "{\"name\": \"%s\", \"status\": \"%s\"}", name, status);
   fprintf(stdout, "service: GET /screenstatus/%s result %s\n", name, output);
   return service_send_json(connection, MHD_HTTP_OK, output);
 }
 
 enum MHD_Result handle_patch_screen_status(
     struct MHD_Connection *connection,
-    const char *id,
+    const char *name,
     const char *body,
     size_t body_len)
 {
   char output[256];
+  int state = -1;
   if (!body || body_len == 0)
-    return service_send_json(connection, MHD_HTTP_BAD_REQUEST,
-                             "{\"error\": \"empty body\"}");
+  {
+    return service_send_json(connection, MHD_HTTP_BAD_REQUEST, "{\"error\": \"empty body\"}");
+  }
+
+  // TODO - proper json parsing
+  if (strcmp("{\"power\":\"ON\"}", body) == 0)
+  {
+    state = 1;
+  }
+  else if (strcmp("{\"power\":\"OFF\"}", body) == 0)
+  {
+    state = 0;
+  }
+  else
+  {
+    return service_send_json(connection, MHD_HTTP_BAD_REQUEST, "{\"error\": \"invalid command\"}");
+  }
 
   /* TODO: parse body (e.g. with cJSON), validate fields, apply update */
-  fprintf(stdout, "service: PATCH /screenstatus/%s body: %.*s\n",
-          (int)body_len, id, body);
+  fprintf(stdout, "service: PATCH /screenstatus/%s body: %s\n", name, body);
 
-  snprintf(output, sizeof(output), "{\"id\": \"%s\", \"status\": \"success\"}", id);
+  ScreenResult result = set_screen_status(name, state);
+  char *status = (result.error) ? result.error : result.response;
+  snprintf(output, sizeof(output), "{\"name\": \"%s\", \"status\": \"%s\"}", name, status);
   return service_send_json(connection, MHD_HTTP_OK, output);
 }
 
 enum MHD_Result handle_get_screens(struct MHD_Connection *connection)
 {
-  char *screens = getScreens();
+  char *screens = get_screens();
   return service_send_json(connection, MHD_HTTP_OK, screens);
 }
 

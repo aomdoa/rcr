@@ -31,8 +31,8 @@ typedef struct
   int screen_config_count;
 } Configuration;
 
-Configuration *getConfigurations();
-ScreenConfig *getScreenConfig(char *);
-ScreenType *getScreenType(char *);
+Configuration *get_configurations();
+ScreenConfig *get_screen_config(const char *);
+ScreenType *get_screen_type(const char *);
 
 #endif /* CONFIG_H */

@@ -7,7 +7,7 @@
 
 int main()
 {
-  getConfigurations(); // ensure it's setup properly
+  get_configurations(); // ensure it's setup properly
   struct MHD_Daemon *d = service_start();
   if (!d)
     return 1;
